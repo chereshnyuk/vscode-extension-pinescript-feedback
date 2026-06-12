@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1] 2026-06-12
+
+### Fixed
+- Improved parsing for multiline continuation patterns and comma-separated expressions used in Pine scripts, reducing false syntax/parse errors.
+
+### Improved
+- Updated Marketplace description and keywords so the extension is easier to discover and feature coverage is clearer.
+
 ## [1.0.0] 2026-06-11
 
 ### Added
