@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: VS Code Marketplace – Pine Script Extension
+    url: https://marketplace.visualstudio.com/search?term=pinescript&target=VSCode
+    about: Install or review the extension on the VS Code Marketplace.
