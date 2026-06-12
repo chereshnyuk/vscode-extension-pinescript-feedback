@@ -1,9 +1,14 @@
 # Changelog
 
+## [1.0.2] 2026-06-12
+
+### Fixed
+- Significantly reduced false-positive errors on built-in Pine Script v6 indicators and strategies, so valid scripts are no longer marked as broken.
+
 ## [1.0.1] 2026-06-12
 
 ### Fixed
-- Improved parsing for multiline continuation patterns and comma-separated expressions used in Pine scripts, reducing false syntax/parse errors.
+- Reduced false syntax and parsing errors in multiline and complex expressions.
 
 ### Improved
 - Updated Marketplace description and keywords so the extension is easier to discover and feature coverage is clearer.
@@ -11,46 +16,36 @@
 ## [1.0.0] 2026-06-11
 
 ### Added
-- IntelliSense now covers 488 Pine Script v6 built-in functions (up from 299) — ta.*, math.*, strategy.*, request.*, str.* and more are fully indexed with signatures, hover docs, and completions
-- New `bitwise-operator` diagnostic flags `<<`, `>>`, `&`, `|`, `^` operators that TradingView rejects (CE10005)
+- IntelliSense now covers many more Pine Script v6 built-in functions, with richer signatures, hover docs, and completions.
+- Added diagnostics for unsupported bitwise operators so scripts fail less often at publish/runtime time.
 
 ### Fixed
-- Completions and hover docs were missing for all `ta.*`, `math.*`, `strategy.*`, `request.*`, and `str.*` functions — now correctly loaded from the reference documentation
+- Restored missing completions and hover documentation for built-in Pine Script function groups.
 
 ## [0.9.9] 2026-06-10
 
 ### Fixed
-- Removed false "bare number" errors on numbers inside multi-line string literals (e.g. `"...value is 0..."`)
-- Removed false "bare number" errors after the `is` type-check keyword
-- Removed false `request.security() in loop` errors — Pine Script v6 allows this
-- Removed false "invalid-statement" for `void` return-type annotations on functions (`void myFunc() =>`)
-- Removed false "invalid-statement" for `float`/`int`/`bool` array-type variants (`float[]`, `int[]`, etc.)
-- Removed false "invalid-statement" when a grammar artifact identifier has any sibling on the same row (more robust check)
-- Removed false "missing //@version=6" in files with `\r\r\n` line endings (increased version search range to 15 lines)
-- Added `non-ascii-char` detection for non-breaking and other special Unicode spaces (U+00A0, U+2002, U+2003, U+2009, U+200B) that cause TradingView lexer errors
-- Added `merge-conflict-marker` error for git conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`) left in code
-- Removed false "line-continuation" errors for `and`/`or` inside indented blocks
-- Removed false "invalid-statement" for `plot(series = signal, ...)` — `series` is a qualifier keyword but the call is still valid
+- Reduced multiple false-positive diagnostics in valid Pine scripts.
+- Improved detection of real syntax issues in copied or malformed code.
+- Improved handling of non-standard file text formatting and special characters.
+- Added validation for unresolved merge conflict markers.
 
 ## [0.9.8] 2026-06-10
 
 ### Fixed
-- Added detection of type annotations inside tuple destructuring brackets — `[float a, float b] = func()` is now flagged as a syntax error (TradingView rejects it; use `[a, b] = func()` instead)
+- Added clearer diagnostics for invalid tuple assignment patterns.
 
 ## [0.9.7] 2026-06-10
 
 ### Fixed
-- No longer reports "Missing //@version=6" when the file uses `// @version=6` (with a space after `//`) — TradingView accepts both forms
+- Version directive detection is now more tolerant and avoids false warnings.
 
 ## [0.9.6] 2026-06-10
 
 ### Fixed
-- Removed false errors on `varip` inside function bodies — Pine Script v6 supports this
-- Removed false "invalid statement" errors on `float`/`int`/`color` typed declarations in comma-separated multi-variable lines
-- Removed false "used before declaration" errors when a local variable inside a function shares its name with a global variable declared later in the file
-- Removed false "line continuation" errors on indented continuation lines and files with non-standard `\r\r\n` line endings
-- Added detection of misspelled script type declarations (e.g. `indicato3r()` now reported as an error)
-- Added detection of `series string` passed to `alertcondition(message=...)` — TradingView requires a `const string` there
+- Reduced false-positive diagnostics in valid scripts, especially in advanced function and declaration patterns.
+- Added diagnostics for common script declaration typos.
+- Added diagnostics for invalid alert message value types.
 
 ## [0.9.4] 2026-06-09
 
@@ -59,8 +54,7 @@
 - New keyboard shortcuts: `Cmd+K, Cmd+I` (Indicator) and `Cmd+K, Cmd+S` (Strategy) on macOS; `Ctrl+K, Ctrl+I` / `Ctrl+K, Ctrl+S` on Windows and Linux
 
 ### Fixed
-- False errors on typed variable declarations (`int x = ...`, `float y = ...`) when the script uses `import`
-- False errors on identifiers inside function bodies that used mixed tab/space indentation
+- Reduced false errors on typed declarations and mixed-indentation files.
 - "Open external website" dialog no longer appears when clicking CodeLens entries
 - Removed Library template (not supported in this release)
 
@@ -72,14 +66,14 @@
 ## [0.9.2] 2026-06-09
 
 ### Fixed
-- False "trailing comma" error on calls where the last argument is a string literal (e.g. `hline(0, "Zero line")` was incorrectly flagged)
+- Fixed false trailing-comma diagnostics in valid function calls.
 - Extension stability: the extension host no longer crashes when opening complex or mixed-indentation Pine Script files
 
 ## [0.9.1] 2026-06-09
 
 ### Fixed
-- False "used before declaration" errors on `obj.field` property accesses — the extension no longer flags a field name (e.g. `currentTrail.bias`) as a forward reference to a same-named global variable
-- False "bare number literal" errors were possible on single-quoted strings containing a word followed by a digit (e.g. `'Level 0'`) — now correctly ignored
+- Fixed false “used before declaration” diagnostics for property access expressions.
+- Fixed false bare-number diagnostics inside valid string content.
 
 ## [0.9.0] 2026-06-09
 
@@ -89,27 +83,25 @@
 - Hover tooltips now show documentation for user-defined symbols
 
 ### Improved
-- Diagnostics catch more real-world Pine Script mistakes: `varip` inside functions, `strategy.*` calls in indicators, `input.*` inside `if`/`for` blocks, Unicode characters that TradingView rejects, variables used before declaration, and duplicate `var` declarations
+- Diagnostics now catch more real-world Pine Script mistakes while keeping fewer false positives.
 
 ## [0.8.9] 2026-06-08
 
 ### Added
-- **Bare number literal detection** — flags a number literal that appears directly after an identifier without an operator (e.g. `ft4 4562`), which causes "Syntax error at input" in TradingView; only checks non-indented top-level lines to avoid false positives in multi-line expressions
-- **Invalid statement detection** — flags a standalone identifier at the global scope (e.g. `gdgdfs` on its own line) which causes `"gdgdfs" is not a valid statement` in TradingView; does not flag inside function bodies where a bare identifier is a valid return value
+- Added diagnostics for missing operators around numeric values.
+- Added diagnostics for invalid standalone statements at global scope.
 
 ### Improved
-- Test coverage expanded to 139 tests
+- Reliability and quality improvements.
 
 ## [0.8.8] 2026-06-07
 
 ### Added
-- **Non-ASCII character detection** — flags Unicode homoglyphs (`×`, `–`, `—`, `≥`, etc.) in code that TradingView rejects at compile time; suggests the correct ASCII equivalent; skips characters inside comments and string literals
-- **`varip` in function body** — flags `varip` used inside a user-defined function (only valid at global scope)
-- **`strategy.*` in non-strategy script** — flags `strategy.entry()`, `strategy.close()`, etc. inside `indicator()` or `library()` scripts
-- **`input.*` inside `if`/`for` block** — flags `input.int()`, `input.float()`, etc. called inside conditional or loop blocks (must be at global scope)
+- Added diagnostics for unsupported non-ASCII symbols in code.
+- Added diagnostics for scope-related usage mistakes in scripts.
 
 ### Improved
-- Test coverage expanded to 132 tests — all diagnostic codes now have full positive and negative test cases
+- Reliability and quality improvements.
 
 ## [0.8.7] 2026-06-07
 
@@ -120,14 +112,14 @@
   - UDT field and method completion after `myVar.` when the type is known
   - Completion shows user variables with inferred or declared type
 - **3 new diagnostics**
-  - `varip` inside a function body → error (only valid at global scope)
-  - `strategy.*()` calls inside `indicator()` or `library()` scripts → error
-  - `input.*()` calls inside `if` / `for` blocks → error (must be at top level)
+  - Better scope validation
+  - Better script-type validation
+  - Better input placement validation
 
 ## [0.8.6] 2026-06-06
 
 ### Improved
-- Diagnostics are smarter about `or`/`and` line continuation — no false warnings when the expression is inside parentheses
+- Diagnostics are smarter about multiline expressions and produce fewer false warnings.
 - Diagnostics no longer flag function parameters as undeclared variables
 - Diagnostics correctly detect duplicate `var` declarations in the same scope
 
@@ -135,10 +127,10 @@
 
 ### Added
 - Diagnostics now warn when a variable is used before it is declared
-- Diagnostics now detect `or`/`and` at the start of a continuation line — a common Pine Script syntax mistake
+- Diagnostics now detect common logical-expression continuation mistakes.
 
 ### Improved
-- Internal code quality improvements across all providers
+- Reliability and stability improvements.
 
 ## [0.8.4] 2026-06-06
 
@@ -163,7 +155,7 @@
 
 ### Improved
 - Marketplace page updated with clearer description, better structure and improved readability
-- Fixed failing tests caused by publisher ID mismatch after marketplace migration
+- Improved release stability after marketplace migration
 
 ## [0.8.0] 2026-06-06
 
@@ -175,8 +167,8 @@
 ## [0.7.0] 2026-06-05
 
 ### Changed
-- Performance improvements with faster symbol lookups across all providers
-- Internal refactoring for stability and correctness
+- Faster code intelligence and navigation performance.
+- Stability and correctness improvements.
 
 ## [0.6.0] 2026-06-05
 
@@ -186,39 +178,39 @@
 - **Color Picker** inline color picker for `color.rgb()` and all `color.*` constants
 - **Format Document** normalizes indentation, trims trailing whitespace, collapses excess blank lines
 - **Getting Started Walkthrough** 4-step onboarding in the VS Code Help tab
-- 3 new settings: `pinescript.references.enable`, `pinescript.color.enable`, `pinescript.formatting.enable`
+- Added new settings to control references, color tools, and formatting behavior.
 
 ## [0.5.0] 2026-06-05
 
 ### Added
 - **Rename Symbol** (F2) renames any user-defined symbol across the file
-- **Smart Folding** folds function bodies, `type` blocks, multiline `indicator()` calls and `// #region` markers
+- **Smart Folding** improves folding for script structures and long declarations.
 - **Code Lens** shows usage count above every user-defined function
 - **Pine Script Explorer** Activity Bar sidebar to browse all built-in namespaces and insert symbols
 
 ## [0.4.0] 2026-06-05
 
 ### Added
-- **Real-time Diagnostics** squiggly lines for missing `//@version=6`, missing `overlay=`, `request.security()` in loops, `plot()` in `if` blocks
+- **Real-time Diagnostics** for common Pine Script mistakes.
 - **Go to Definition** (F12) jumps to user-defined symbols and opens TradingView docs for built-ins
 - **Document Highlight** highlights all occurrences of the symbol under cursor in real time
 - **Status Bar** shows `Pine Script v6` or a warning for every active `.pine` file
 - **Open on TradingView** button in the editor title bar
-- 4 new settings for diagnostics, hover links and completions
+- Added new settings for diagnostics, hover links, and completion behavior.
 
 ## [0.3.0] 2026-06-04
 
 ### Changed
-- Smaller VSIX package size
+- Smaller extension download size
 - Faster extension activation
 
 ## [0.2.0] 2026-06-04
 
 ### Added
 - **Document Outline** shows functions, variables, UDTs and inputs in breadcrumbs and the Outline panel
-- **Code Actions** quick fixes to add `//@version=6`, add `overlay=`, or wrap with `barstate.isconfirmed`
+- **Code Actions** quick fixes for common script setup and structure issues.
 - **Semantic Highlighting** colors user-defined functions, variables, types and parameters distinctly
-- **@pinescript Chat** AI assistant in Copilot Chat with `/explain`, `/indicator`, `/strategy` commands
+- **@pinescript Chat** AI assistant for explaining and scaffolding Pine scripts.
 
 ## [0.1.0] 2026-06-04
 
