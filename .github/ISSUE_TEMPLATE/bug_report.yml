@@ -45,6 +45,19 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: pine_version
+    attributes:
+      label: Pine Script version
+      description: Which version of Pine Script does the affected script use?
+      options:
+        - "v5"
+        - "v4"
+        - "v3 or earlier"
+        - Not applicable / unsure
+    validations:
+      required: true
+
   - type: input
     id: extension_version
     attributes:

@@ -14,7 +14,7 @@ Use this repository to:
 
 ## How to submit feedback
 
-1. Open the [Issues](../../issues) tab.
+1. Open the [Issues](https://github.com/SergeyChereshnyuk/vscode-extension-pinescript-feedback/issues) tab.
 2. Click **New issue**.
 3. Choose the appropriate template:
    - **Bug Report** – for problems and unexpected behaviour
