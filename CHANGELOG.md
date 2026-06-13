@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.4] 2026-06-13
+
+### Fixed
+- Fixed false-positive `invalid-type-keyword` for UDT array types (e.g., `OrderBlock[]`, `FVG[]`).
+- Fixed false-positive `same-row-statements` for valid comma-separated variable declarations.
+- Improved recognition of Pine Script v6 built-in types including `footprint`.
+- Fixed false-positive `unknown-function-reference` for binary operator `and`.
+
+### Added
+- New diagnostic check for `return` statements used outside function contexts.
+
 ## [1.0.3] 2026-06-13
 
 ### Fixed
