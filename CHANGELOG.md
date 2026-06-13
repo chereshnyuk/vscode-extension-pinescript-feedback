@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.6] 2026-06-13
+
+### Improved
+- Improved handling for imported Pine symbols so completions, hover docs, references, and definitions work more consistently across files.
+- Updated built-in Pine Script data and documentation for broader symbol coverage and more accurate editor guidance.
+
+### Fixed
+- Reduced false-positive diagnostics in complex scripts and import-heavy code.
+
 ## [1.0.5] 2026-06-13
 
 ### Fixed
