@@ -67,7 +67,7 @@
 ## [0.9.4] 2026-06-09
 
 ### Added
-- Pine Script files now appear in **File → New File...** — pick **Pine Script Indicator** or **Pine Script Strategy** directly from VS Code's built-in new file menu
+- Pine Script files now appear in **File → New File...** - pick **Pine Script Indicator** or **Pine Script Strategy** directly from VS Code's built-in new file menu
 - New keyboard shortcuts: `Cmd+K, Cmd+I` (Indicator) and `Cmd+K, Cmd+S` (Strategy) on macOS; `Ctrl+K, Ctrl+I` / `Ctrl+K, Ctrl+S` on Windows and Linux
 
 ### Fixed
@@ -78,7 +78,7 @@
 ## [0.9.3] 2026-06-09
 
 ### Fixed
-- Syntax error detection was not working — standalone invalid identifiers and other structural errors were not reported. Now all syntax checks work correctly.
+- Syntax error detection was not working - standalone invalid identifiers and other structural errors were not reported. Now all syntax checks work correctly.
 
 ## [0.9.2] 2026-06-09
 
@@ -95,7 +95,7 @@
 ## [0.9.0] 2026-06-09
 
 ### Added
-- IntelliSense now includes your own functions, variables, types and parameters — autocomplete works across the entire file, not just built-ins
+- IntelliSense now includes your own functions, variables, types and parameters - autocomplete works across the entire file, not just built-ins
 - Function parameters appear in completions inside the function body
 - Hover tooltips now show documentation for user-defined symbols
 
@@ -123,7 +123,7 @@
 ## [0.8.7] 2026-06-07
 
 ### Added
-- **User-defined symbol support** — IntelliSense now understands your own functions, variables and types
+- **User-defined symbol support** - IntelliSense now understands your own functions, variables and types
   - Completion, hover and signature help work for user-defined functions (with full parameter list)
   - Hover shows fields for User-Defined Types (`type MySignal ...`)
   - UDT field and method completion after `myVar.` when the type is known
@@ -166,7 +166,7 @@
 
 ### Improved
 - Updated `.pine` file icon with a new design that looks sharper in the VS Code file explorer
-- Diagnostics no longer flag commented-out lines as errors — only real code is analyzed
+- Diagnostics no longer flag commented-out lines as errors - only real code is analyzed
 
 ## [0.8.1] 2026-06-06
 
