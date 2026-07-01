@@ -1,5 +1,48 @@
 # Changelog
 
+## [1.4.0] 2026-07-01
+
+### Fixed
+- Reduced false positive diagnostics in several Pine Script scenarios, including history-dependent call checks and drawing-related `time[1]` usage.
+- Added a new warning for using bare `syminfo.ticker` as the symbol argument in `request.*()` calls.
+- Improved release packaging so the published VSIX avoids including development-only test modules.
+- Fixed release and pre-release workflow issues that could block stable publishing or cause redundant version/tag handling.
+- Resolved CI and lint issues that were preventing release and quality checks from passing reliably.
+
+### Improved
+- Enhanced diagnostic accuracy for corpus and snapshot-based checks, reducing stale or incorrect warnings.
+- Improved local and CI verification parity so release-related checks behave more consistently across environments.
+- Optimized release and quality workflows to avoid unnecessary cache and verification work.
+
+## [1.1.9] 2026-06-26
+
+### Added
+- Introduced language-scoped highlighting defaults for Pine Script, eliminating the need for workspace writes.
+- Added history-sensitive call diagnostics for improved handling of conditional and iterative contexts in Pine Script.
+- Implemented a new warning for `ta.crossover()` usage in conditional expressions, ensuring safer and more consistent diagnostics.
+
+### Improved
+- Enhanced internal stability and performance optimizations.
+
+## [1.1.8] 2026-06-25
+
+### Fixed
+- Improved diagnostics context handling to enhance accuracy and reduce false positives.
+- Optimized detection of local variables for better code analysis.
+
+## [1.1.7] 2026-06-25
+
+### Added
+- Enhanced constant file parsing to support markdown tables and type extraction.
+- Improved handling of currency namespace members to prevent undeclared identifier diagnostics.
+
+### Fixed
+- Updated diagnostics performance threshold to improve accuracy.
+- Improved undeclared identifier handling and member access checks in diagnostics.
+
+### Improved
+- Enhanced internal stability and performance optimizations.
+
 ## [1.1.6] 2026-06-24
 
 ### Added
