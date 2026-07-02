@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+### Removed
+- Removed the custom status bar item that showed Pine Script version (`Pine Script v6`), which duplicated the built-in language indicator. Version issues are still reported via diagnostics (`//@version` missing or non-v6).
+
 ## [1.4.0] 2026-07-01
 
 ### Fixed
