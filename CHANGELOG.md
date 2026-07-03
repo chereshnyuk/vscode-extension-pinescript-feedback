@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0] 2026-07-03
+
+### Added
+- Language Model Tools for Copilot Agent mode: `#pinescript_lookup_builtin`, `#pinescript_get_diagnostics`, and `#pinescript_scaffold` backed by local Pine metadata and diagnostics.
+- Explorer context menu entries for **Pine Script: New Indicator** and **New Strategy**, plus editor title **Format Document** for `.pine` files.
+- CHANGELOG-aware what's-new notification with **View Release Notes** action after updates.
+
+### Improved
+- `@pinescript` chat participant now uses editor selection for `/explain`, suggests follow-up prompts, and honors attached Agent tool references.
+- Walkthrough refreshed with diagnostics, formatting, and Agent tools steps aligned to the current product surface.
+- Explicit lazy `activationEvents` and `Machine Learning` marketplace category for AI contributions.
+
 ## [1.7.6] 2026-07-03
 
 ### Fixed
