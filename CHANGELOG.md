@@ -38,6 +38,9 @@
 
 ## [Unreleased]
 
+### Improved
+- Updated README and walkthrough content to match the current product surface (namespace IntelliSense, version diagnostics, and doc-reference links) and removed stale references to the deleted Pine Script Explorer, custom version status bar, and comment URL click-through.
+
 ### Added
 - Clickable **View in Pine Script Reference** links in hover, completion documentation, and signature help for built-in Pine Script symbols, opening the official TradingView v6 reference page for that function, constant, or variable.
 - Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode; the `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
