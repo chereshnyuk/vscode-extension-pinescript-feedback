@@ -1,6 +1,25 @@
 # Changelog
 
+## [1.7.3] 2026-07-02
+
+### Fixed
+- Reduced false positive diagnostics for `if`/`else if` and `else` branches in flattened Pine Script code.
+- Fixed false positive `CE10101` warnings for additive conditions in control-flow headers.
+- Improved `CW10003` reachability checks to better match TradingView behavior and avoid incorrect warnings in common chart-bar patterns.
+- Corrected the short-title warning diagnostic code to follow kebab-case conventions while preserving the existing warning message.
+- Removed a duplicate Pine Script status bar entry so diagnostics are the primary source of status information.
+- Fixed extension logging settings coverage so validation no longer fails on the wrong package path.
+
+### Improved
+- Strengthened pre-commit checks so lint, dead-code, and policy issues are caught earlier.
+- Improved release reliability by hardening publish workflows against git sync races with the Marketplace.
+- Enhanced optional crash reporting reliability and privacy safeguards.
+- Added structured extension logging guidance to keep runtime logs consistent and easier to maintain.
+
 ## [Unreleased]
+
+### Added
+- Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode; the `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
 
 ### Removed
 - Removed the custom status bar item that showed Pine Script version (`Pine Script v6`), which duplicated the built-in language indicator. Version issues are still reported via diagnostics (`//@version` missing or non-v6).
