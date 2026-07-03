@@ -19,6 +19,7 @@
 ## [Unreleased]
 
 ### Added
+- Clickable **View in Pine Script Reference** links in hover, completion documentation, and signature help for built-in Pine Script symbols, opening the official TradingView v6 reference page for that function, constant, or variable.
 - Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode; the `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
 
 ### Removed
