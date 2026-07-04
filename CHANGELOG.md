@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Added extension UI localization for 14 display locales: manifest strings via `package.nls.*`, runtime strings via `vscode.l10n.t` and `l10n/bundle.l10n.*`, DeepL-driven translation workflow, and `localization:gate` in precommit, pretest, verify:ci, and CI.
+
 ### Improved
 - Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
 
