@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Added a richer post-update experience: brief What's New toast, markdown preview for release notes, GitHub Release link on the public feedback repository, Command Palette **View Release Notes**, and a one-time **What's New in 2.0** walkthrough for 2.x users.
 - Added extension UI localization for 14 display locales: manifest strings via `package.nls.*`, runtime strings via `vscode.l10n.t` and `l10n/bundle.l10n.*`, DeepL-driven translation workflow, and `localization:gate` in precommit, pretest, verify:ci, and CI.
 
 ### Improved
