@@ -1,5 +1,42 @@
 # Changelog
 
+## [Unreleased]
+
+### Improved
+- Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
+
+## [2.0.2] 2026-07-03
+
+### Improved
+- Improved release packaging checks so published builds are less likely to fail on bundled AI-related assets.
+- Enhanced stability and reliability for the extension’s shipped language features.
+
+## [2.0.1] 2026-07-03
+
+### Fixed
+- Fixed release verification so the web extension bundle and VSIX contents are checked against the correct shipped outputs.
+- Improved release recovery guidance when a Marketplace publish is behind the git history.
+
+## [2.0.0] 2026-07-03
+
+### Added
+- Added document links, on-type formatting, type definitions, inlay hints, and opt-in inline completions for Pine Script.
+- Added workspace symbols, selection range support, and format selection support for Pine Script.
+- Added semantic token delta updates for smoother syntax highlighting.
+- Added virtual workspace support for local Pine imports.
+- Added AI-assisted Pine Script tools, chat prompts, and guided onboarding content.
+
+### Fixed
+- Fixed a false positive diagnostic for `ta.barssince` inside user-defined functions.
+- Fixed reference links in hover, completion, and signature help so they respect the setting to hide TradingView URLs.
+- Fixed packaging metadata so the extension presents accurate marketplace information.
+- Fixed the extension so local import handling works correctly in virtual workspaces.
+
+### Improved
+- Improved editor responsiveness and language feature coverage across common Pine Script workflows.
+- Improved extension reliability and packaging for Marketplace distribution.
+- Improved support for web usage and reduced unnecessary VSIX contents.
+
 ## [1.8.0] 2026-07-03
 
 ### Added
