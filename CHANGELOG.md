@@ -9,6 +9,7 @@
 
 ### Improved
 - Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
+- Expanded `README.md` for Pine Script DevKit 2.0: full settings table, Agent tools, platforms, onboarding deep links, and positive docs-accuracy guards. Coordinate privacy wording with usage-telemetry work in change `add-usage-telemetry-appinsights` before publish if both land together.
 
 ## [2.0.2] 2026-07-03
 
