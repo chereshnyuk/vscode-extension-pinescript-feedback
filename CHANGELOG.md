@@ -16,6 +16,7 @@
 - Added extension UI localization for 14 display locales: manifest strings via `package.nls.*`, runtime strings via `vscode.l10n.t` and `l10n/bundle.l10n.*`, DeepL-driven translation workflow, and `localization:gate` in precommit, pretest, verify:ci, and CI.
 
 ### Improved
+- Removed the editor title **Format Document** button for `.pine` files; use Command Palette (**Pine Script: Format Document**) or `Shift+Alt+F` instead.
 - Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
 - Expanded `README.md` for Pine Script DevKit 2.0: full settings table, Agent tools, platforms, onboarding deep links, and positive docs-accuracy guards. Coordinate privacy wording with usage-telemetry work in change `add-usage-telemetry-appinsights` before publish if both land together.
 

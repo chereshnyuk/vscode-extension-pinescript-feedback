@@ -114,7 +114,7 @@ A custom `.pine` file icon is included and adapts to both light and dark editor 
 
 - **New Indicator**: Command Palette, Explorer context menu, `⌘⌥I` on macOS, `Ctrl+Alt+I` on Windows and Linux, or [deep link](vscode://chereshnyuk.chereshnyuk-com-pinescript/command/newIndicator)
 - **New Strategy**: Command Palette, Explorer context menu, `⌘⌥S` on macOS, `Ctrl+Alt+S` on Windows and Linux
-- **Format Document**: Command Palette with **Pine Script: Format Document**, editor title run action, `Shift+Alt+F` when a `.pine` file is focused, or `pinescript.formatDocument`
+- **Format Document**: Command Palette with **Pine Script: Format Document**, `Shift+Alt+F` when a `.pine` file is focused, or `pinescript.formatDocument`
 - **View Release Notes**: Command Palette with **Pine Script: View Release Notes**
 - **Go to Definition**: `F12`
 - **Go to Type Definition**: `Ctrl/Cmd+Click` or Command Palette
