@@ -169,7 +169,7 @@ Changes to the Pine Script Sentry settings apply **immediately**; you do not nee
 ## Support and feedback
 
 - **Questions:** [Marketplace Q&A](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-- **Bugs and feature requests:** [GitHub Issues](https://github.com/SergeyChereshnyuk/vscode-extension-pinescript-feedback/issues)
+- **Bugs and feature requests:** [GitHub Issues](https://github.com/chereshnyuk/vscode-extension-pinescript-feedback/issues)
 
 ## Extension Settings
 
