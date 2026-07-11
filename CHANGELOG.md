@@ -4,6 +4,7 @@
 
 ### Improved
 - Updated the VS Code Marketplace extension icon.
+- Improved first-open diagnostics latency: document open skips the edit debounce delay, and full-file checks publish fast script/syntax findings before heavy history rules (CW1000x) complete. Workspace `workspaceContains:**/*.pine` activation still warms parser infrastructure only — diagnostics run when a `.pine` editor opens.
 
 ## [2.2.12] 2026-07-11
 
