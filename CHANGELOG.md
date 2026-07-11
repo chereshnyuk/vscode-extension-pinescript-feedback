@@ -4,7 +4,15 @@
 
 ### Improved
 - Updated the VS Code Marketplace extension icon.
-- Improved first-open diagnostics latency: document open skips the edit debounce delay, and full-file checks publish fast script/syntax findings before heavy history rules (CW1000x) complete. Workspace `workspaceContains:**/*.pine` activation still warms parser infrastructure only — diagnostics run when a `.pine` editor opens.
+- Improved first-open diagnostics latency. Document open skips the edit debounce delay.
+- Full-file checks publish fast script and syntax findings before heavy history rules complete.
+- Workspace activation still warms parser infrastructure when a workspace contains Pine files.
+- Diagnostics run when a `.pine` editor opens.
+
+### Fixed
+- Fixed provider integration tests that doubled diagnostic counts after synchronous extension open scheduling.
+- Provider tests now use the unified `runRuleDiagnostics` harness.
+- Publish-pipeline tests use `readPublishedDiagnostics`.
 
 ## [2.2.12] 2026-07-11
 
@@ -17,7 +25,7 @@
 
 ### Fixed
 - Refactored CW10004 lazy ternary diagnostics to a unified `classifyTernaryBranchRelation` model, replacing the per-corpus exemption zoo.
-- Fixed false positive CW10004 on config-gated passthrough smoothing (`input.bool ? f_ewma(x, α) : x`) in supertrend_dqn-style scripts.
+- Fixed false positive CW10004 on config-gated passthrough smoothing ternary patterns in supertrend-style scripts.
 - Reduced false positive CW10004 diagnostics for configuration-selector ternary patterns.
 
 ## [2.2.10] 2026-07-10
@@ -29,7 +37,7 @@
 ## [2.2.9] 2026-07-08
 
 ### Improved
-- Reduced false positives in lazy-evaluation diagnostics for ternary branches inside pure wrapper calls, including cases involving `nz()` and `ta.*` expressions.
+- Reduced false positives in lazy-evaluation diagnostics for ternary branches inside pure wrapper calls, including cases involving `nz` and `ta.*` expressions.
 - Improved reachability diagnostics so short-circuit conditions are handled more consistently in `and`/`or`-only scripts.
 - Refined history-based diagnostics to better match TradingView behavior for structural reachability and ternary evaluation patterns.
 - Updated diagnostic baselines to reflect the latest false-positive reductions and reachability refinements.
@@ -55,7 +63,9 @@
 
 ### Fixed
 - Fewer false CW10003 warnings on built-in moving-average smoothing helpers that dispatch `ta.*` through configuration-time `input.string` or enum selectors.
-- Fixed false CW10003 on MA-selector `switch` dispatch when the selector reaches an inner routine through wrapper user-defined functions (for example `f_pass(maType)` → `f_ma(_typ)`), matching TradingView bar-every-execution semantics per [CW10003](https://www.tradingview.com/pine-script-docs/errors/CW10003/) and the [inconsistent behavior demo](https://www.tradingview.com/pine-script-docs/language/user-defined-functions) (series-varying selector arguments still warn).
+- Fixed false CW10003 on MA-selector `switch` dispatch when the selector reaches an inner routine through wrapper user-defined functions.
+- Aligned MA-selector dispatch with TradingView bar-every-execution semantics documented in CW10003.
+- Series-varying selector arguments still warn.
 
 ## [2.2.3] 2026-07-06
 
@@ -108,7 +118,8 @@
 - Added extension UI localization for 14 display locales: manifest strings via `package.nls.*`, runtime strings via `vscode.l10n.t` and `l10n/bundle.l10n.*`, DeepL-driven translation workflow, and `localization:gate` in precommit, pretest, verify:ci, and CI.
 
 ### Improved
-- Removed the editor title **Format Document** button for `.pine` files; use Command Palette (**Pine Script: Format Document**) or `Shift+Alt+F` instead.
+- Removed the editor title **Format Document** button for `.pine` files.
+- Formatting remains available from Command Palette **Pine Script: Format Document** or `Shift+Alt+F`.
 - Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
 - Expanded `README.md` for Pine Script DevKit 2.0: full settings table, Agent tools, platforms, onboarding deep links, and positive docs-accuracy guards. Coordinate privacy wording with usage-telemetry work in change `add-usage-telemetry-appinsights` before publish if both land together.
 
@@ -187,7 +198,7 @@
 - Workspace Trust support keeps language features available in Restricted Mode, while chat and workspace theme overrides remain gated until trust is granted.
 
 ### Fixed
-- Reduced false positives for CW10003 on `ta.highest` / `ta.lowest` helpers called only inside `request.security` expressions (including Donchian / HTF cache patterns such as `supertrend_dqn.pine`).
+- Reduced false positives for CW10003 on `ta.highest` and `ta.lowest` helpers called only inside `request.security` expressions, including Donchian and HTF cache patterns.
 - Reduced false positives for CW10003 on transitive drawing-only routines.
 - Improved CW10004 behavior for user-defined security wrappers in lazy ternaries so warnings better match the intended parity rules.
 
@@ -210,25 +221,33 @@
 ## [Unreleased]
 
 ### Fixed
-- Restored CW10003 on user-defined routines (for example `f_donchian`) called inside conditional HTF refresh guards that wrap `request.security` expressions, matching TradingView compiler behavior on patterns such as `supertrend_dqn.pine`. Built-in `ta.*` nodes inside those routine bodies remain deduplicated; inlined `ta.*` inside security expressions remain CW10002-exempt.
-- Fixed CW10003 false positives when history-dependent calls appear inside `switch` branches keyed by a routine parameter without a `series` qualifier (for example uncalled `ma1` in `MOVINGaverage osc map og.pine` and library MA dispatch helpers). `isConditionBarVariant` no longer treats inconclusive parameter inference as bar-coupling when the selector is a routine parameter and `inferSeriesKind` is not `series`, aligning with Pine `simple`/configuration static dispatch documented in TradingView CW10003 and type-system guides.
+- Restored CW10003 on user-defined routines called inside conditional HTF refresh guards that wrap `request.security` expressions, matching TradingView compiler behavior on common HTF cache patterns.
+- Built-in `ta.*` nodes inside those routine bodies remain deduplicated.
+- Inlined `ta.*` inside security expressions remain CW10002-exempt.
+- Fixed CW10003 false positives when history-dependent calls appear inside `switch` branches keyed by a routine parameter without a `series` qualifier.
+- Aligned switch-arm reachability with Pine `simple` and configuration static dispatch documented in TradingView CW10003 and type-system guides.
 
 ### Improved
-- Updated README and walkthrough content to match the current product surface (namespace IntelliSense, version diagnostics, and doc-reference links) and removed stale references to the deleted Pine Script Explorer, custom version status bar, and comment URL click-through.
+- Updated README and walkthrough content to match the current product surface for namespace IntelliSense, version diagnostics, and doc-reference links.
+- Removed stale references to the deleted Pine Script Explorer, custom version status bar, and comment URL click-through.
 
 ### Added
 - Clickable **View in Pine Script Reference** links in hover, completion documentation, and signature help for built-in Pine Script symbols, opening the official TradingView v6 reference page for that function, constant, or variable.
-- Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode; the `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
-- Declared limited virtual workspace support so Pine Script language features remain available when browsing remote repositories (for example GitHub Repositories); local import path resolution via `workspace.fs` and Go to Definition on resolvable imports; workspace-wide reference search is not supported.
+- Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode.
+- The `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
+- Declared limited virtual workspace support so Pine Script language features remain available when browsing remote repositories such as GitHub Repositories.
+- Local import path resolution via `workspace.fs` and Go to Definition on resolvable imports still work.
+- Workspace-wide reference search is not supported.
 
 ### Removed
-- Removed the custom status bar item that showed Pine Script version (`Pine Script v6`), which duplicated the built-in language indicator. Version issues are still reported via diagnostics (`//@version` missing or non-v6).
+- Removed the custom status bar item that showed Pine Script version, which duplicated the built-in language indicator.
+- Version issues are still reported via diagnostics for missing or non-v6 `//@version` directives.
 
 ## [1.4.0] 2026-07-01
 
 ### Fixed
 - Reduced false positive diagnostics in several Pine Script scenarios, including history-dependent call checks and drawing-related `time[1]` usage.
-- Added a new warning for using bare `syminfo.ticker` as the symbol argument in `request.*()` calls.
+- Added a new warning for using bare `syminfo.ticker` as the symbol argument in `request.*` calls.
 - Improved release packaging so the published VSIX avoids including development-only test modules.
 - Fixed release and pre-release workflow issues that could block stable publishing or cause redundant version/tag handling.
 - Resolved CI and lint issues that were preventing release and quality checks from passing reliably.
@@ -243,7 +262,7 @@
 ### Added
 - Introduced language-scoped highlighting defaults for Pine Script, eliminating the need for workspace writes.
 - Added history-sensitive call diagnostics for improved handling of conditional and iterative contexts in Pine Script.
-- Implemented a new warning for `ta.crossover()` usage in conditional expressions, ensuring safer and more consistent diagnostics.
+- Implemented a new warning for `ta.crossover` usage in conditional expressions, ensuring safer and more consistent diagnostics.
 
 ### Improved
 - Enhanced internal stability and performance optimizations.
@@ -283,7 +302,7 @@
 
 ### Improved
 - Enhanced internal stability and performance optimizations.
-- Improved documentation parsing by ignoring additional terms (`seealso` and `functionsummary`).
+- Improved documentation parsing by ignoring additional terms `seealso` and `functionsummary`.
 - Optimized diagnostics provider to utilize cached context for better performance.
 
 ## [1.1.4] 2026-06-23
@@ -332,7 +351,7 @@ No user-visible changes in this release.
 ### Fixed
 - Resolved multiple false positives in diagnostics, including:
   - Issues with combined vector bands.
-  - False positives related to unused arguments in specific functions (e.g., `f_calc_regime_events`, `f_open_position`, `drawLevelLabel`, etc.).
+  - False positives related to unused arguments in specific functions such as `f_calc_regime_events`, `f_open_position`, and `drawLevelLabel`.
   - Errors in detecting empty indicator bodies.
   - False positives in "magic hour" diagnostics.
 
@@ -348,7 +367,7 @@ No user-visible changes in this release.
 ### Improved
 - Enhanced diagnostics for Pine Script built-ins and arguments:
   - Improved recognition of additional built-in dotted identifiers such as `array.new`, `matrix.new`, `map.new`, `order`, `label.style_none`, and `label.style_*`.
-  - Reduced false positives for common Pine Script v6 patterns, including user-defined types (UDTs), enum type references, and generic constructors.
+  - Reduced false positives for common Pine Script v6 patterns, including user-defined types, enum type references, and generic constructors.
   - Improved handling of underscore-prefixed function parameters and KDE-style `kernel` selectors to avoid incorrect unused-argument warnings.
   - Enhanced diagnostics for use-before-declaration scenarios by preserving the first-seen top-level declaration.
 
@@ -393,7 +412,7 @@ No user-visible changes in this release.
 
 ### Fixed
 - Resolved an issue where scripts importing libraries incorrectly triggered visual/empty-script diagnostics.
-- Fixed false duplicate-parameter-argument diagnostics for specific plot functions (`plotcandle`, `plotbar`, `plotchar`, `plotshape`) when positional title arguments were misinterpreted as color parameters.
+- Fixed false duplicate-parameter-argument diagnostics for specific plot functions when positional title arguments were misinterpreted as color parameters.
 - Improved handling of multi-line ternary operators by correctly recognizing continuation lines containing the outer `:` at the appropriate parenthesis depth.
 
 ## [1.0.21] 2026-06-19
@@ -410,7 +429,7 @@ No user-visible changes in this release.
 ## [1.0.19] 2023-10-19
 
 ### Added
-- Introduced telemetry boundary to capture and log runtime errors during extension operations (e.g., status bar updates, diagnostics, code lens refresh).
+- Introduced telemetry boundary to capture and log runtime errors during extension operations such as status bar updates, diagnostics, and code lens refresh.
 
 ### Fixed
 - Resolved false positives in `box.new` right argument type validation.
@@ -426,7 +445,7 @@ No user-visible changes in this release.
 - Support for `force_overlay` named argument in `bgcolor` function for Pine Script v6.
 
 ### Fixed
-- Resolved an issue where user-defined type (UDT) symbols could leak between documents, ensuring symbol completions are scoped to the active document.
+- Resolved an issue where user-defined type symbols could leak between documents, ensuring symbol completions are scoped to the active document.
 
 ## [1.0.17] 2023-10-05
 
@@ -476,7 +495,7 @@ No user-visible changes in this release.
 ## [1.0.12] 2026-06-16
 
 ### Added
-- Added diagnostics for self-referenced initializers and for too many arguments in `color.new()` calls.
+- Added diagnostics for self-referenced initializers and for too many arguments in `color.new` calls.
 - Added a warning when historical indexing is used on variables declared in local conditional scopes, where values may be inconsistent across bars.
 
 ### Fixed
@@ -593,12 +612,13 @@ No user-visible changes in this release.
 
 ### Added
 - Pine Script files now appear in **File → New File...** - pick **Pine Script Indicator** or **Pine Script Strategy** directly from VS Code's built-in new file menu
-- New keyboard shortcuts: `Cmd+K, Cmd+I` (Indicator) and `Cmd+K, Cmd+S` (Strategy) on macOS; `Ctrl+K, Ctrl+I` / `Ctrl+K, Ctrl+S` on Windows and Linux
+- New keyboard shortcuts on macOS: `Cmd+K, Cmd+I` for Indicator and `Cmd+K, Cmd+S` for Strategy.
+- New keyboard shortcuts on Windows and Linux: `Ctrl+K, Ctrl+I` for Indicator and `Ctrl+K, Ctrl+S` for Strategy.
 
 ### Fixed
 - Reduced false errors on typed declarations and mixed-indentation files.
 - "Open external website" dialog no longer appears when clicking CodeLens entries
-- Removed Library template (not supported in this release)
+- Removed Library template because it is not supported in this release.
 
 ## [0.9.3] 2026-06-09
 
@@ -649,8 +669,8 @@ No user-visible changes in this release.
 
 ### Added
 - **User-defined symbol support** - IntelliSense now understands your own functions, variables and types
-  - Completion, hover and signature help work for user-defined functions (with full parameter list)
-  - Hover shows fields for User-Defined Types (`type MySignal ...`)
+  - Completion, hover and signature help work for user-defined functions with full parameter list.
+  - Hover shows fields for User-Defined Types such as `type MySignal`.
   - UDT field and method completion after `myVar.` when the type is known
   - Completion shows user variables with inferred or declared type
 - **3 new diagnostics**
@@ -715,9 +735,9 @@ No user-visible changes in this release.
 ## [0.6.0] 2026-06-05
 
 ### Added
-- **Find All References** (Shift+F12) finds all usages of any user-defined symbol
+- **Find All References** with Shift+F12 finds all usages of any user-defined symbol
 - **Clickable Links** TradingView URLs in comments are now hyperlinks
-- **Color Picker** inline color picker for `color.rgb()` and all `color.*` constants
+- **Color Picker** inline color picker for `color.rgb` and all `color.*` constants
 - **Format Document** normalizes indentation, trims trailing whitespace, collapses excess blank lines
 - **Getting Started Walkthrough** 4-step onboarding in the VS Code Help tab
 - Added new settings to control references, color tools, and formatting behavior.
@@ -725,7 +745,7 @@ No user-visible changes in this release.
 ## [0.5.0] 2026-06-05
 
 ### Added
-- **Rename Symbol** (F2) renames any user-defined symbol across the file
+- **Rename Symbol** with F2 renames any user-defined symbol across the file
 - **Smart Folding** improves folding for script structures and long declarations.
 - **Code Lens** shows usage count above every user-defined function
 - **Pine Script Explorer** Activity Bar sidebar to browse all built-in namespaces and insert symbols
@@ -734,7 +754,7 @@ No user-visible changes in this release.
 
 ### Added
 - **Real-time Diagnostics** for common Pine Script mistakes.
-- **Go to Definition** (F12) jumps to user-defined symbols and opens TradingView docs for built-ins
+- **Go to Definition** with F12 jumps to user-defined symbols and opens TradingView docs for built-ins
 - **Document Highlight** highlights all occurrences of the symbol under cursor in real time
 - **Status Bar** shows `Pine Script v6` or a warning for every active `.pine` file
 - **Open on TradingView** button in the editor title bar
