@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.3] 2026-07-12
+
+### Added
+- Added visible Marketplace, security scan, license, and Pine v6 support badges to the README.
+- Added public VirusTotal report links for release artifacts.
+
+### Fixed
+- Reduced false-positive diagnostics for valid Pine history and conditional expression patterns.
+
+### Improved
+- Refined the Marketplace description and localized extension metadata to better explain the extension's value.
+- Improved README organization for clearer onboarding and setup flow.
+- Improved Marketplace presentation with clearer chat participant wording and settings ordering.
+
 ## [2.3.0] 2026-07-11
 
 ### Fixed
@@ -10,13 +24,6 @@
 ### Improved
 - Diagnostics now appear sooner when opening Pine Script files, especially on larger files.
 - Improved built-in Pine Script reference descriptions and documentation links.
-
-## [Unreleased]
-
-### Improved
-- Updated the VS Code Marketplace extension icon.
-- Improved Marketplace manifest metadata with rating badge, refined keywords, and clearer Pine Script chat participant description.
-- Added README header badges for VS Marketplace installs and rating.
 
 ## [2.2.12] 2026-07-11
 
