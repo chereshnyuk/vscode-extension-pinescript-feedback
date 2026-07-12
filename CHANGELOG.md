@@ -15,15 +15,8 @@
 
 ### Improved
 - Updated the VS Code Marketplace extension icon.
-- Improved first-open diagnostics latency. Document open skips the edit debounce delay.
-- Full-file checks publish fast script and syntax findings before heavy history rules complete.
-- Workspace activation still warms parser infrastructure when a workspace contains Pine files.
-- Diagnostics run when a `.pine` editor opens.
-
-### Fixed
-- Fixed provider integration tests that doubled diagnostic counts after synchronous extension open scheduling.
-- Provider tests now use the unified `runRuleDiagnostics` harness.
-- Publish-pipeline tests use `readPublishedDiagnostics`.
+- Improved Marketplace manifest metadata with rating badge, refined keywords, and clearer Pine Script chat participant description.
+- Added README header badges for VS Marketplace installs and rating.
 
 ## [2.2.12] 2026-07-11
 
@@ -70,14 +63,6 @@
 - Enhanced diagnostics performance and responsiveness.
 - Improved release stability by rebalancing diagnostics performance thresholds to reduce CI flakiness.
 
-## [Unreleased]
-
-### Fixed
-- Fewer false CW10003 warnings on built-in moving-average smoothing helpers that dispatch `ta.*` through configuration-time `input.string` or enum selectors.
-- Fixed false CW10003 on MA-selector `switch` dispatch when the selector reaches an inner routine through wrapper user-defined functions.
-- Aligned MA-selector dispatch with TradingView bar-every-execution semantics documented in CW10003.
-- Series-varying selector arguments still warn.
-
 ## [2.2.3] 2026-07-06
 
 ### Fixed
@@ -120,19 +105,6 @@
 - Improved the visibility of Pine Script parentheses in the light theme so they remain readable.
 - Fixed the “What’s New” notification so release notes and additional actions no longer overflow or clip.
 - Ensured localization files are included correctly in release packages.
-
-## [Unreleased]
-
-### Added
-- Added extension `onUri` deep-link handler so external docs can open allowlisted walkthroughs, settings, and authoring commands via `vscode://chereshnyuk.chereshnyuk-com-pinescript/...` URLs.
-- Added a richer post-update experience: brief What's New toast, markdown preview for release notes, GitHub Release link on the public feedback repository, Command Palette **View Release Notes**, and a one-time **What's New in 2.0** walkthrough for 2.x users.
-- Added extension UI localization for 14 display locales: manifest strings via `package.nls.*`, runtime strings via `vscode.l10n.t` and `l10n/bundle.l10n.*`, DeepL-driven translation workflow, and `localization:gate` in precommit, pretest, verify:ci, and CI.
-
-### Improved
-- Removed the editor title **Format Document** button for `.pine` files.
-- Formatting remains available from Command Palette **Pine Script: Format Document** or `Shift+Alt+F`.
-- Declared explicit lazy activation events for the Getting Started walkthrough and core onboarding commands so extension activation and what's-new onboarding run when users open the walkthrough without opening a `.pine` file first.
-- Expanded `README.md` for Pine Script DevKit 2.0: full settings table, Agent tools, platforms, onboarding deep links, and positive docs-accuracy guards. Coordinate privacy wording with usage-telemetry work in change `add-usage-telemetry-appinsights` before publish if both land together.
 
 ## [2.0.7] 2026-07-05
 
@@ -228,31 +200,6 @@
 - Improved release reliability by hardening publish workflows against git sync races with the Marketplace.
 - Enhanced optional crash reporting reliability and privacy safeguards.
 - Added structured extension logging guidance to keep runtime logs consistent and easier to maintain.
-
-## [Unreleased]
-
-### Fixed
-- Restored CW10003 on user-defined routines called inside conditional HTF refresh guards that wrap `request.security` expressions, matching TradingView compiler behavior on common HTF cache patterns.
-- Built-in `ta.*` nodes inside those routine bodies remain deduplicated.
-- Inlined `ta.*` inside security expressions remain CW10002-exempt.
-- Fixed CW10003 false positives when history-dependent calls appear inside `switch` branches keyed by a routine parameter without a `series` qualifier.
-- Aligned switch-arm reachability with Pine `simple` and configuration static dispatch documented in TradingView CW10003 and type-system guides.
-
-### Improved
-- Updated README and walkthrough content to match the current product surface for namespace IntelliSense, version diagnostics, and doc-reference links.
-- Removed stale references to the deleted Pine Script Explorer, custom version status bar, and comment URL click-through.
-
-### Added
-- Clickable **View in Pine Script Reference** links in hover, completion documentation, and signature help for built-in Pine Script symbols, opening the official TradingView v6 reference page for that function, constant, or variable.
-- Declared Workspace Trust support so Pine Script language features remain available in Restricted Mode.
-- The `@pinescript` chat assistant and workspace theme overrides require granting trust to the workspace.
-- Declared limited virtual workspace support so Pine Script language features remain available when browsing remote repositories such as GitHub Repositories.
-- Local import path resolution via `workspace.fs` and Go to Definition on resolvable imports still work.
-- Workspace-wide reference search is not supported.
-
-### Removed
-- Removed the custom status bar item that showed Pine Script version, which duplicated the built-in language indicator.
-- Version issues are still reported via diagnostics for missing or non-v6 `//@version` directives.
 
 ## [1.4.0] 2026-07-01
 
