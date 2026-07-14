@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.4.0] 2026-07-14
+
+### Added
+- Added a diagnostic for unterminated string literals in Pine v6 files.
+
+### Fixed
+- Fixed string literal handling so `//` inside quoted text is no longer treated as a comment.
+- Fixed missing consistency warnings for some fixed-lag built-in routine reads.
+- Fixed false consistency warnings for fixed-lag routine reads that match Pine runtime behavior.
+- Fixed false local-history warnings in nested conditions.
+- Fixed a false consistency warning for branch-local reassignments of untyped parameters.
+- Fixed false CW10003 warnings on inline drawing lifecycle helpers (`label.delete(label.new(...)[1])`) under `barstate.islast` (dna bands parity).
+- Fixed false CW10003 warnings on built-in `ta.*` calls in routine assignment short-circuit chains where TradingView emits CW10002 only.
+
 ## [2.3.4] 2026-07-12
 
 ### Fixed
