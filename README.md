@@ -6,7 +6,7 @@ Pine Script DevKit brings Pine Script development tools to VS Code for building 
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/854a60228bfd49297e6b66eee891ec913b5bcc4e51055e5ee265ff9d6342dabb)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/952301d3d4e2f4d9b86685a4dc879fb175ae6177170d6623893e119814fa054f)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 <!-- readme-badges:end -->
@@ -200,9 +200,9 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 ## Security
 
 <!-- virustotal-trust:start -->
-Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.4.0.
+Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.5.0.
 
-Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/854a60228bfd49297e6b66eee891ec913b5bcc4e51055e5ee265ff9d6342dabb).
+Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/952301d3d4e2f4d9b86685a4dc879fb175ae6177170d6623893e119814fa054f).
 <!-- virustotal-trust:end -->
 
 ## Financial Disclaimer and Risk Notice
@@ -222,11 +222,11 @@ Pine Script DevKit is an independent project and is not affiliated with, endorse
 This extension is provided under the MIT License. The warranty disclaimer and limitation of liability in the `LICENSE` file apply to the maximum extent permitted by applicable law.
 
 <!-- readme-badges:prerelease:start -->
-<!-- virustotal-release-version:2.3.7 -->
+<!-- virustotal-release-version:2.4.1 -->
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/8feece1d53dafb68aff9abfcc5dcffed917c48639cbd0f37c4b96850cca50418)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/9308d432f11ccba75a4d4517555f2b12abab413b78f4c7c0f6f0523753b3d53c)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 <!-- readme-badges:prerelease:end -->

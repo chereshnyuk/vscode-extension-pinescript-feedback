@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.5.0] 2026-07-15
+
+### Fixed
+- Restored warning parity for Combined Vector Bands and related conditional and loop patterns.
+- Fixed missed history-dependent warnings when `var` or `varip` boolean guards are reassigned later.
+- Fixed stale line tracking after multi-edit changes so diagnostics and semantic highlighting update the correct lines.
+- Fixed a session issue where language intelligence could remain unavailable after a startup failure instead of recovering on retry.
+- Fixed incorrect analysis results that could occur with chained field access expressions.
+
+### Improved
+- Improved responsiveness of signature help and completions for incomplete function calls in large files.
+- Improved editor responsiveness by cancelling superseded background analysis while documents are changing.
+- Improved memory cleanup during repeated editing and symbol analysis.
+
+## [Unreleased]
+
+### Added
+- Added CE10272 undeclared identifier detection for the global scope and top level `if`, `for`, `while` and `switch` blocks, matching TradingView compiler behavior.
+- Added a fix hint for CE10272 that explains declaration order and scope visibility, localized into all supported languages.
+
+### Improved
+- Undeclared identifier analysis now runs on a single AST scope model and also covers method bodies.
+- Undeclared identifier messages now include the TradingView error code CE10272.
+
+## [2.4.2] 2026-07-14
+
+### Fixed
+- Reduced incorrect CW10003 warnings for selector-less boolean-guard switch patterns, aligning diagnostics more closely with TradingView behavior.
+- Reduced incorrect CW10003 warnings for drawing-handle lifecycle patterns.
+- Reduced incorrect CW10013 shadowing warnings for variables declared in mutually exclusive `if` branches.
+
 ## [2.4.0] 2026-07-14
 
 ### Added
