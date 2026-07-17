@@ -3,19 +3,27 @@
 ## [Unreleased]
 
 ### Added
-- New diagnostics for full TradingView parity, each verified against TradingView's server-side compiler: shadowing of built-in variables (`float hlc3 = …`), type errors for `na` passed to non-nullable `bool` fields in user-defined type constructors, and incompatible `if` branch return types (e.g. a drawing object vs. a procedure call) at function tails.
-- History-consistency warnings now cover conditional scopes inside function bodies: enum-typed switch selectors, exported library routines (no call-site assumptions), loop bodies with multiple statements, and `not na(param)` guards whose guarded call consumes the parameter.
-- A full-corpus TradingView parity baseline: recorded server-compile expectations for all 720 `test-data/v6` scripts are now a blocking CI guard — any divergence from TradingView (outside declared exclusions such as remote-library imports) fails the build.
-- A unified Pine type model (`PineType` + AST expression resolver) as the single source of type knowledge for type-aware diagnostics.
+- IntelliSense for third-party Pine libraries. Hover, completion, and signature help now work for `import Author/Lib/N` aliases when the library source is available.
+- Automatic third-party library resolution. The extension fetches the public source of an imported library from TradingView once per version and caches it locally forever. The new `pinescript.remoteLibraries.fetch` setting turns network fetching off.
+- Workspace library stubs. Place a library source at `.pine-libs/Author/Lib/N.pine` to get full IntelliSense offline or for private libraries. A quick fix on the import creates the stub file.
+- A bundled offline set of popular community libraries ships with the extension, so their imports resolve without any network access.
+
+### Improved
+- Imports of third-party Pine libraries no longer show a warning. TradingView compiles these imports, so the editor now marks unresolved ones with a subtle hint instead.
+- Hovering a third-party library import now shows its resolution status and how to enable full IntelliSense when it is unresolved.
+
+## [2.5.4] 2026-07-17
+
+### Added
+- Warnings now flag history-dependent calls in switch dispatch over typed selectors such as string or enum parameters, matching TradingView behavior.
+- Warnings now cover history-dependent calls under bare bool parameters in ternary and if-guard usage, matching TradingView behavior.
 
 ### Fixed
-- Removed false CW10004 ternary warnings that TradingView does not emit: guards derived from parameterized user-defined function calls, symbol self-match `str.contains` guards, and the request.security callee override that warned at the wrong location.
-- Shadowing warnings (CW10013) now detect priors past invisible sibling scopes and in intermediate local parent scopes (indent heuristic replaced with structural AST checks); the `day_type_str` corpus hardcode was retired.
-- Corrected builtin metadata: `time` and `time_close` are `series int` (were mis-generated as `series float`).
-- Removed bogus built-in suggestions leaked from documentation parsing (section headings like "See Also", placeholder entries like `barmerge.*`) and deduplicated repeated entries, so completion lists show only real Pine v6 symbols.
-- Fixed switch expressions losing case arms after a `[tuple] = call(), value` arm, so later arms parse and get diagnostics again.
-- Fixed missing history-consistency warnings for function parameters declared as plain `bool` (no qualifier): TradingView treats them as series like every other declared type, so ternary and `if` guards over such parameters now warn; `simple bool` parameters stay silent.
-- Fixed missing CW10003 warnings in `switch` dispatchers whose selector parameter has a declared type (for example `string mode` or an enum), matching TradingView, which treats such parameters as series regardless of call sites. Scripts with typed moving-average selectors may see new warnings on their switch arms; parameters without a declared type and `simple`-qualified parameters stay silent.
+- Corrected parsing of switch arms whose body ends with a comma-separated value after an assignment so later arms are no longer dropped.
+- Color swatches and usage counts no longer appear for matches inside strings and comments.
+
+### Improved
+- Improved accuracy of type and numeric inference for more reliable diagnostics.
 
 ## [2.5.3] 2026-07-16
 

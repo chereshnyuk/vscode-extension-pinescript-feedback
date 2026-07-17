@@ -6,7 +6,7 @@ Pine Script DevKit brings Pine Script development tools to VS Code for building 
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/fb8cca1b4c86f59126cd20f7313de7863fd3881283cf188bb957e5005a800311)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/7b766c0457dfb31ad19b911a7fc6c89819a300560d70c69fb8abfcba5770b9de)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 <!-- readme-badges:end -->
@@ -95,6 +95,7 @@ Format, scaffold, and refine Pine scripts with snippets, templates, inlay hints,
 
 - **Library scaffolds**: use the `library` snippet prefix; there is no separate New Library file command
 - **Local imports**: `import` paths resolve via the workspace file system; Go to Definition and document links work on resolvable local targets
+- **Third-party libraries**: `import Author/Lib/N` statements are always accepted and calls through the alias are never flagged as unknown. Popular community libraries resolve automatically with member hover, completion, and signature help. For private or unresolved libraries, place the library source at `.pine-libs/Author/Lib/N.pine` in the workspace root; all published TradingView libraries are open-source, so the source can be copied from the library's TradingView page. Unresolved third-party imports show a subtle editor hint, never a warning
 - **Virtual workspaces**: edit Pine in remote and virtual workspaces such as [vscode.dev](https://vscode.dev) and GitHub Repositories with diagnostics, IntelliSense, formatting, and local import support where workspace trust allows
 - **Limitation**: workspace-wide reference search is not supported in virtual workspaces
 
@@ -187,6 +188,7 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 - **`pinescript.codeLens.enable`**: usage count above user-defined functions
 - **`pinescript.color.enable`**: color picker for `color.rgb()` and `color.*` constants
 - **`pinescript.formatting.enable`**: document, selection, and on-type formatting
+- **`pinescript.remoteLibraries.fetch`**: fetch public third-party library sources from TradingView for import IntelliSense; workspace stubs under `.pine-libs/` keep working when off
 - **`pinescript.theme.applyOverrides`**: opt-in workspace token color overrides; requires Workspace Trust
 - **`pinescript.telemetry.sentry.sampleRate`**: error sample rate when VS Code telemetry allows Sentry reporting
 - **`pinescript.telemetry.sentry.environment`**: optional Sentry environment override
@@ -200,9 +202,9 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 ## Security
 
 <!-- virustotal-trust:start -->
-Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.5.3.
+Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.5.4.
 
-Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/fb8cca1b4c86f59126cd20f7313de7863fd3881283cf188bb957e5005a800311).
+Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/7b766c0457dfb31ad19b911a7fc6c89819a300560d70c69fb8abfcba5770b9de).
 <!-- virustotal-trust:end -->
 
 ## Financial Disclaimer and Risk Notice
