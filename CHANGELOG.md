@@ -3,6 +3,9 @@
 ## [Unreleased]
 
 ### Added
+- A local MCP server for AI agents. On VS Code desktop the extension registers a Model Context Protocol server so MCP-capable assistants in the same window can use the Pine agent tools; the new `pinescript.mcp.enable` setting turns it off.
+- Two new agent tools on both the Copilot and MCP surfaces: built-in search by name or description keywords, and a workspace-wide diagnostics scan across all `.pine` files.
+- A new command **Pine Script: Generate Agents Guidance** writes a managed Pine workflow section into `AGENTS.md` so AI agents outside Copilot pick up the recommended tool workflow.
 - IntelliSense for third-party Pine libraries. Hover, completion, and signature help now work for `import Author/Lib/N` aliases when the library source is available.
 - Automatic third-party library resolution. The extension fetches the public source of an imported library from TradingView once per version and caches it locally forever. The new `pinescript.remoteLibraries.fetch` setting turns network fetching off.
 - Workspace library stubs. Place a library source at `.pine-libs/Author/Lib/N.pine` to get full IntelliSense offline or for private libraries. A quick fix on the import creates the stub file.

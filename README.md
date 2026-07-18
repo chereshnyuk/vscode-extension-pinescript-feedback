@@ -1,4 +1,4 @@
-Pine Script DevKit brings complete Pine Script v6 language intelligence to VS Code for building TradingView indicators, strategies, and libraries, with diagnostics, formatting, and `@pinescript` Copilot chat.
+Pine Script DevKit brings complete Pine Script v6 language intelligence to VS Code for building TradingView indicators, strategies, and libraries, with diagnostics, formatting, `@pinescript` Copilot chat, and an MCP server for AI agents.
 
 Pine Script DevKit brings Pine Script development tools to VS Code for building TradingView indicators, strategies, and libraries. The extension provides language intelligence, documentation, diagnostics, navigation, formatting, templates, editor tooling, and GitHub Copilot integration in a single development experience. Create library scripts with the `library` snippet prefix; file templates are available for indicators and strategies.
 
@@ -9,6 +9,7 @@ Pine Script DevKit brings Pine Script development tools to VS Code for building 
 [![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/7b766c0457dfb31ad19b911a7fc6c89819a300560d70c69fb8abfcba5770b9de)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
+[![MCP](https://img.shields.io/badge/MCP-server-6E56CF)](https://modelcontextprotocol.io)
 <!-- readme-badges:end -->
 
 ## Code Intelligence
@@ -35,14 +36,20 @@ Use `@pinescript` in Copilot Chat to ask language-specific questions, explain co
 Enable **Agent mode tools** in Copilot Agent mode when a `.pine` file is in context:
 
 - **`#lookupBuiltin`**: built-in signatures and docs from local metadata
+- **`#searchBuiltins`**: find built-ins by name or description keywords when the exact name is unknown
 - **`#getDiagnostics`**: current Pine diagnostics for the active editor
+- **`#workspaceDiagnostics`**: read-only diagnostics scan across all `.pine` files in the workspace
 - **`#scaffold`**: indicator or strategy starter template, text only
 - **`#applyScaffold`**: write a scaffold to the workspace; requires an open folder and Workspace Trust
 - **`#suggestFix`**: remediation hints for diagnostic codes
 
 Bundled **chat instructions**, **prompt files** for review, diagnostic fixes, and new indicators, and the **pine-indicator** skill attach automatically when a `.pine` file is in context.
 
-**Workspace Trust:** `@pinescript` requires Workspace Trust. `#applyScaffold` requires trust and an open workspace folder. Core Pine language features including syntax, IntelliSense, diagnostics, formatting, and navigation remain available in Restricted Mode. Other Agent tools register without a trust gate but operate on editor context only.
+**MCP server for AI agents:** on VS Code desktop the extension registers a local **Model Context Protocol** server named `pine-script-devkit`, so MCP-capable assistants in the same window discover the same seven Pine tools under their `pinescript_*` names with identical behavior. The server listens on loopback only and requires a per-session token supplied through the VS Code MCP registration. Control it with the `pinescript.mcp.enable` setting; turning it off stops and hides the server. The MCP surface is desktop-only and not available in VS Code for the web. Hosts that do not support the VS Code MCP provider API can still use the Copilot surfaces or the generated guidance below.
+
+**Guidance for other agents:** run **Pine Script: Generate Agents Guidance** to write a managed Pine workflow section into `AGENTS.md` at your workspace root. The command creates the file when missing, updates only its own marker-delimited section on re-runs, and requires Workspace Trust. MCP hosts can fetch the same content as the `pinescript-workflow` prompt without writing files.
+
+**Workspace Trust:** `@pinescript` requires Workspace Trust. `#applyScaffold` requires trust and an open workspace folder on both the Copilot and MCP surfaces. Core Pine language features including syntax, IntelliSense, diagnostics, formatting, and navigation remain available in Restricted Mode. Other Agent tools register without a trust gate but operate on editor context only.
 
 AI-generated responses and code are provided as development assistance only. They may be incomplete, inaccurate, or unsuitable for your use case. Always review, test, and validate generated code in TradingView before relying on it.
 
@@ -58,8 +65,9 @@ The VS Code Marketplace **FEATURES** tab lists technical contributions declared 
 - **Chat Participants**: the `@pinescript` Copilot Chat participant for explain, indicator, and strategy workflows.
 - **Chat Prompt Files**: reusable slash prompts for review, diagnostic fixes, and new indicators.
 - **Chat Skills**: the **pine-indicator** Agent skill for scaffold and debug workflows.
+- **MCP Server Definition Providers**: the **Pine Script DevKit** local MCP server registration for MCP-capable hosts on desktop.
 - **Commands**: **Pine Script: New Indicator**, **New Strategy**, **Format Document**, and **View Release Notes**.
-- **Language Model Tools**: `#lookupBuiltin`, `#getDiagnostics`, `#scaffold`, `#applyScaffold`, and `#suggestFix` for Agent mode.
+- **Language Model Tools**: `#lookupBuiltin`, `#searchBuiltins`, `#getDiagnostics`, `#workspaceDiagnostics`, `#scaffold`, `#applyScaffold`, and `#suggestFix` for Agent mode.
 - **Programming Languages**: Pine Script grammar, `.pine` file association, snippets, and semantic token types.
 - **Settings**: every `pinescript.*` configuration key documented in [Extension Settings](#extension-settings).
 - **Settings Default Overrides**: Pine-scoped syntax and semantic colors applied only to `.pine` files; stronger workspace theme writes require `pinescript.theme.applyOverrides`.
@@ -117,6 +125,7 @@ A custom `.pine` file icon is included and adapts to both light and dark editor 
 - **New Strategy**: Command Palette, Explorer context menu, `⌘⌥S` on macOS, `Ctrl+Alt+S` on Windows and Linux
 - **Format Document**: Command Palette with **Pine Script: Format Document**, `Shift+Alt+F` when a `.pine` file is focused, or `pinescript.formatDocument`
 - **View Release Notes**: Command Palette with **Pine Script: View Release Notes**
+- **Generate Agents Guidance**: Command Palette with **Pine Script: Generate Agents Guidance**; writes the managed Pine section into `AGENTS.md`; requires trust and an open folder
 - **Go to Definition**: `F12`
 - **Go to Type Definition**: `Ctrl/Cmd+Click` or Command Palette
 - **Find All References**: `Shift+F12`
@@ -186,6 +195,7 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 - **`pinescript.inlayHints.showParameterNames`**: parameter name hints at positional built-in call sites
 - **`pinescript.inlineCompletions.enable`**: opt-in inline completions; off by default
 - **`pinescript.codeLens.enable`**: usage count above user-defined functions
+- **`pinescript.mcp.enable`**: expose Pine agent tools to MCP-capable hosts via a local loopback server; desktop only
 - **`pinescript.color.enable`**: color picker for `color.rgb()` and `color.*` constants
 - **`pinescript.formatting.enable`**: document, selection, and on-type formatting
 - **`pinescript.remoteLibraries.fetch`**: fetch public third-party library sources from TradingView for import IntelliSense; workspace stubs under `.pine-libs/` keep working when off
@@ -195,8 +205,8 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 
 ## Platforms
 
-- **VS Code desktop**: full language features and Copilot integration
-- **VS Code for the web**: web extension bundle; language features and AI when Copilot and trust allow
+- **VS Code desktop**: full language features, Copilot integration, and the MCP server for AI agents
+- **VS Code for the web**: web extension bundle; language features and Copilot AI when trust allows; no MCP server
 - **Virtual workspaces**: remote repos and vscode.dev; see [Imports and Libraries](#imports-and-libraries) for reference-search limits
 
 ## Security
@@ -224,11 +234,11 @@ Pine Script DevKit is an independent project and is not affiliated with, endorse
 This extension is provided under the MIT License. The warranty disclaimer and limitation of liability in the `LICENSE` file apply to the maximum extent permitted by applicable law.
 
 <!-- readme-badges:prerelease:start -->
-<!-- virustotal-release-version:2.4.1 -->
+<!-- virustotal-release-version:2.5.5 -->
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/9308d432f11ccba75a4d4517555f2b12abab413b78f4c7c0f6f0523753b3d53c)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/49074408f15bc509d5df3399dfbfb819d7a5246797e315b3fe88fb1bb54f3d90)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 <!-- readme-badges:prerelease:end -->
