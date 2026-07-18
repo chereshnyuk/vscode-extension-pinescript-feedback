@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Improved
+- Updated the Tree-sitter parsing engine to 0.26.11, picking up upstream query-engine correctness fixes.
+- Leaner diagnostics engine: legacy text-based fallback analysis was removed now that all semantic checks run on the syntax tree, reducing per-keystroke work.
+
 ## [2.6.0] 2026-07-18
 
 ### Added
