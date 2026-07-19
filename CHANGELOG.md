@@ -2,22 +2,35 @@
 
 ## [Unreleased]
 
-### Added
+### Fixed
 
-- History-consistency diagnostics now analyze calls into resolved third-party libraries (Tier 2 imports): resolved library members classify through the same AST effect pipeline as built-ins, including transitive method chains through imported types.
-- TradingView error-cascade parity: a variable bound to an expression carrying a hard type error now reports `Undeclared identifier` at its field-access uses, exactly where TradingView does.
-- Compound `or` guards now match TradingView: a bar-variant operand (e.g. `barstate.isconfirmed or someInput`) keeps history-consistency warnings active regardless of operand order.
+- Imports of third party libraries whose author renamed their TradingView account now resolve again with full IntelliSense.
+- Imports of libraries whose names differ only by letter case no longer receive symbols from the wrong sibling library. Wrong case imports stay unresolved to match the case sensitive TradingView compiler.
+- Bundled metadata for cybermediaboy/TAUtilityLib now reflects the real library across all published versions instead of a single wrong version.
+- Library data cached on disk before this fix refreshes itself once in the background so stale entries heal automatically.
 
 ### Improved
 
-- Absolute TradingView parity: the corpus baseline guard now compares raw engine output against raw TradingView server-compile output across all 842 corpus scripts with zero divergences — the typed-exclusions file and every comparator filter mechanism were deleted, and a policy guard prevents their reintroduction.
-- Diagnostics anchored inside wrapped multiline statements now report at the statement's start line with TradingView's joined-column attribution.
-- The unified Pine type resolver is memoized per run, types numeric for-loop counters, specializes polymorphic numeric built-ins (`nz`, `math.max/min/round/sqrt`), and now backs branch return-type checking and numeric-kind classification.
+- The bundled third party library catalog now covers more popular community libraries and ships compressed, reducing the extension package size.
+
+## [2.6.3] 2026-07-19
+
+### Added
+
+- Diagnostics now analyze the effects of resolved external library members so warnings match TradingView on scripts that rely on shared libraries.
 
 ### Fixed
 
-- Corrected built-in metadata for all eight `timeframe.is*` variables (`isdaily`, `isweekly`, `ismonthly`, `isintraday`, `isseconds`, `isminutes`, `isticks`, `isdwm`): they are `simple bool`, not `series float` (official Pine v6 reference).
-- Corrected built-in metadata for `time_tradingday` and `timenow`: both are `series int` UNIX times, not `series float` (official Pine v6 reference).
+- Corrected metadata for time_tradingday and timenow so their type is reported as series int.
+- Corrected metadata for the timeframe.is family of variables so their type is reported as simple bool.
+
+### Improved
+
+- Aligned error cascade behavior with TradingView so uses that depend on a failed declaration are reported consistently.
+- Improved diagnostic line and column reporting for statements wrapped across multiple lines so positions match TradingView.
+- Refined guard detection for not na checks and compound or conditions so history related warnings match TradingView more closely.
+- Reduced stale resolution hints and improved overall diagnostic accuracy against TradingView.
+- Optimized diagnostic type resolution for faster and more responsive analysis.
 
 ## [2.6.1] 2026-07-18
 
