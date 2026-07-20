@@ -1,5 +1,31 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Corrected the types of built-in variables so type-aware diagnostics judge them accurately. Symbol information such as `syminfo.ticker` and `syminfo.prefix` was previously recorded as a number rather than text, which could make correct code look wrong.
+- Filled in the argument types of built-in functions, so argument checks now cover most parameters instead of a minority of them.
+- Scripts that reference built-in functions which do not exist in Pine v6 such as `color.hsv` or `label.set_url` are now flagged as unknown instead of being accepted silently.
+
+### Improved
+
+- Built-in symbol types, descriptions, and signatures now come from the official Pine Script v6 reference, so hover and completion information matches TradingView more closely.
+
+## [2.7.0] 2026-07-19
+
+### Changed
+
+- Removed the "Pine Script:" prefix from command titles so commands stay grouped under their category in the command palette.
+- Aligned diagnostic message wording with TradingView for closer consistency with the official checker.
+- Standardized diagnostic message formatting with a uniform code suffix and added consistent punctuation to setting descriptions.
+
+### Improved
+
+- Updated translations across all supported languages for command titles, setting descriptions, and diagnostic messages.
+- Faster diagnostics on large multi-routine scripts with significantly reduced processing time per run.
+- Optimized diagnostics analysis to lower memory use and improve responsiveness while editing.
+
 ## [2.6.4] 2026-07-19
 
 ### Added

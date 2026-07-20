@@ -3,11 +3,10 @@ Pine Script DevKit brings complete Pine Script v6 language intelligence to VS Co
 Pine Script DevKit brings Pine Script development tools to VS Code for building TradingView indicators, strategies, and libraries. The extension provides language intelligence, documentation, diagnostics, navigation, formatting, templates, editor tooling, and GitHub Copilot integration in a single development experience. Create library scripts with the `library` snippet prefix; file templates are available for indicators and strategies.
 
 <!-- readme-badges:start -->
-
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/fab8129bf3a26488f9fb72c6984703aa65bf81f5708e6ca9ea6471b77005d03d)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/febc85ea549ab0cf968c1576caa6f7de3303e790fa1657f4ef7553802ce468b8)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 [![MCP](https://img.shields.io/badge/MCP-server-6E56CF)](#ai-integration)
@@ -217,10 +216,9 @@ All settings are available in the VS Code Settings editor under **Pine Script**.
 ## Security
 
 <!-- virustotal-trust:start -->
+Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.7.0.
 
-Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.6.4.
-
-Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/fab8129bf3a26488f9fb72c6984703aa65bf81f5708e6ca9ea6471b77005d03d).
+Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/febc85ea549ab0cf968c1576caa6f7de3303e790fa1657f4ef7553802ce468b8).
 <!-- virustotal-trust:end -->
 
 ## Financial Disclaimer and Risk Notice
