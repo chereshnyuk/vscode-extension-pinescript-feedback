@@ -12,7 +12,7 @@ Build TradingView indicators, strategies, and libraries in VS Code with full Pin
 
 <!-- readme-badges:end -->
 
-![Pine Script DevKit autocomplete and signature help in a .pine file](assets/screenshots/hero.png)
+![Completion on a user-defined type listing its fields and user-defined methods](assets/screenshots/hero.png)
 
 ## Quick start
 
@@ -28,15 +28,17 @@ Stop hunting through documentation. Autocomplete, hover docs, and signature help
 
 Hover any built-in and follow **View in Pine Script Reference** to open the official TradingView page. Semantic highlighting keeps your own symbols visually distinct from built-ins.
 
-![Namespace autocomplete with signature help](assets/screenshots/intellisense.gif)
+![Signature help while filling a call, showing parameter qualifiers and overloads](assets/screenshots/intellisense.png)
 
 ## Catch mistakes as you type
 
 Real-time diagnostics flag missing or non-v6 `//@version` declarations, incomplete `indicator()` and `strategy()` configuration, import resolution problems, and common Pine pitfalls. Everything lands in the Problems panel, and quick-fix code actions repair the common cases in one click: add `//@version=6`, add `overlay=`, or wrap a block with `barstate.isconfirmed`.
 
-![Diagnostics in the Problems panel with a quick fix](assets/screenshots/diagnostics.png)
+![A type-qualifier violation in the Problems panel with its quick fix](assets/screenshots/diagnostics.png)
 
 ## Find your way around any script
+
+Land on the symbol you need without scrolling, even in an unfamiliar thousand-line strategy.
 
 - **Symbol navigation**: Go to Definition (`F12`), Go to Type Definition, Find All References (`Shift+F12`), and Rename Symbol (`F2`)
 - **Workspace symbols**: jump to any user-defined Pine symbol across your `.pine` files with `⌘T` / `Ctrl+T`
@@ -45,7 +47,11 @@ Real-time diagnostics flag missing or non-v6 `//@version` declarations, incomple
 - **Smart folding** for function bodies, `type` blocks, and `// #region` markers
 - **Document links** on built-in call sites, the version header, and resolvable local imports
 
+![Go to Definition, Find All References, and the Outline view over user-defined Pine symbols](assets/screenshots/navigation.png)
+
 ## Keep code clean without the busywork
+
+Let the editor handle the mechanical work while inferred types and documentation stay in view.
 
 - **Auto-formatter**: whole document, selection, or on-type. Normalizes 4-space indentation, trims trailing whitespace, collapses excess blank lines. Run it with **Pine Script: Format Document**, `Shift+Alt+F`, or the `pinescript.formatDocument` command.
 - **40+ Snippets** covering indicator, strategy, and library scaffolds, TA patterns, control flow, drawing objects, and tables.
@@ -53,7 +59,7 @@ Real-time diagnostics flag missing or non-v6 `//@version` declarations, incomple
 - **Color picker** for `#RRGGBB`, `color.rgb()`, and every `color.*` constant.
 - **File templates** for new indicators and strategies; create libraries with the `library` snippet prefix.
 
-![Hover documentation and inlay hints](assets/screenshots/hover-inlay.png)
+![Hover on a user-defined function alongside inlay hints showing inferred types](assets/screenshots/hover-inlay.png)
 
 ## Imports and libraries
 
@@ -64,8 +70,6 @@ Local `import` paths resolve through the workspace, so Go to Definition and docu
 Pine Script DevKit ships a `@pinescript` GitHub Copilot Chat participant and a set of **Language Model Tools** for Copilot Agent mode, all grounded in local Pine v6 metadata rather than guesswork.
 
 Ask `@pinescript` to explain selected code, or use `/explain`, `/indicator`, and `/strategy` to generate scaffolds. In Agent mode the tools `#lookupBuiltin`, `#searchBuiltins`, `#getDiagnostics`, `#workspaceDiagnostics`, `#scaffold`, `#applyScaffold`, and `#suggestFix` become available when a `.pine` file is in context. Bundled chat instructions, prompt files, and the **pine-indicator** skill attach automatically.
-
-![Pine tools exposed to an MCP-capable agent](assets/screenshots/mcp.png)
 
 **Model Context Protocol server.** On VS Code desktop the extension registers a local MCP server named `pine-script-devkit`, so any MCP-capable assistant in the same window discovers the same Pine tools under their `pinescript_*` names. It listens on loopback only. Toggle it with `pinescript.mcp.enable`. The MCP surface is desktop-only and unavailable in VS Code for the web.
 
