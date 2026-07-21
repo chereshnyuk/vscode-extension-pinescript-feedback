@@ -4,25 +4,30 @@
 
 ### Added
 
-- Type mismatch detection for four cases TradingView rejects but the editor previously accepted: conditional branches that cannot share a type such as `close > 0 ? 1 : "a"`, assignments and typed declarations whose value does not fit the variable such as `int x = 1.5`, operators applied to incompatible values such as `"text" + close`, and built-in call arguments whose type or qualifier does not match the parameter such as `plot("hello")` or a bar-varying length passed to `ta.ema`.
-- These checks stay quiet whenever a type cannot be determined confidently, so unfamiliar or partially written code is not flagged on a guess.
-
-### Changed
-
-- Argument type problems now report under a single code, `argument-type-mismatch`. It replaces four narrower codes (`box-right-arg-type-mismatch`, `builtin-param-qualifier-mismatch`, `builtin-const-param-series-mismatch`, `function-arg-type-mismatch`), which are no longer reported. If you filter or suppress problems by code, update those entries. The checks themselves were not removed — they were folded into the general argument check, which now also covers calls the old ones missed: overloaded built-ins such as `box.new` and `label.new`, script declarations, and the types of your own function parameters.
+- Generic collection types are now tracked through your code. Creating a collection with `array.new<Family>(5)`, reading from it with `array.get`, or building one with `array.from` all carry the element type, so a mismatch such as storing an `array<Family>` in an `array<Other>` is reported. The result of `request.security` follows the expression you pass it.
 
 ### Fixed
 
-- Switch blocks whose body begins with a comment are now read correctly. Previously the entire block could be misread, hiding its contents from analysis and producing misleading results.
-- Arguments to overloaded built-ins are matched against the specific overload being called, so a call such as `timestamp("America/New_York", 2020, 1, 1)` is no longer misread against a different overload's parameters.
-- More accurate type reasoning in several places: dividing two whole numbers now yields a whole number, results of functions such as `math.max` and `nz` keep the stability of their arguments, and a call to your own function is no longer mistaken for a built-in that happens to share its short name.
-- Corrected the types of built-in variables so type-aware diagnostics judge them accurately. Symbol information such as `syminfo.ticker` and `syminfo.prefix` was previously recorded as a number rather than text, which could make correct code look wrong.
-- Filled in the argument types of built-in functions, so argument checks now cover most parameters instead of a minority of them.
-- Scripts that reference built-in functions which do not exist in Pine v6 such as `color.hsv` or `label.set_url` are now flagged as unknown instead of being accepted silently.
+- Generic constructor calls are no longer misread. `array.new<Family>(5)`, `array.new<label>(5)`, `array.new<color>(20)`, `array.new<chart.point>(5)` and `matrix.new<Family>(2)` were previously parsed as a chain of comparisons rather than as calls, which hid them from every check, from parameter hints, and from call-aware navigation. Only four element types were unaffected: `float`, `int`, `bool` and `string`.
+- Collections are now treated as exact in their element type, matching TradingView. An `array<int>` no longer fits where an `array<float>` is expected, and vice versa. Whole numbers widen to decimals for plain values, but not inside a collection.
 
-### Improved
+## [2.7.1] 2026-07-21
 
-- Built-in symbol types, descriptions, and signatures now come from the official Pine Script v6 reference, so hover and completion information matches TradingView more closely.
+### Added
+
+- Added type checking for conditional branches, assignments, operator operands, and call arguments based on the Pine type model.
+- Added argument type checking for multi-signature built-ins such as box.new, line.new, label.new, and timestamp.
+
+### Fixed
+
+- Fixed false negatives so references to non-existent built-in functions like input.resolution and alertforStrategyOrderFills are now flagged.
+- Fixed parsing of switch statements whose body begins with a comment.
+- Corrected built-in type information for variables and function parameters, improving the accuracy of type-related diagnostics.
+- Removed an exemption that previously hid real coordinate type errors.
+
+### Changed
+
+- Built-in metadata is now sourced directly from the official TradingView v6 reference and verified against the compiler for improved accuracy.
 
 ## [2.7.0] 2026-07-19
 
