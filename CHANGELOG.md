@@ -1,15 +1,14 @@
 # Changelog
 
-## [Unreleased]
-
-### Added
-
-- Generic collection types are now tracked through your code. Creating a collection with `array.new<Family>(5)`, reading from it with `array.get`, or building one with `array.from` all carry the element type, so a mismatch such as storing an `array<Family>` in an `array<Other>` is reported. The result of `request.security` follows the expression you pass it.
+## [2.7.2] 2026-07-21
 
 ### Fixed
 
-- Generic constructor calls are no longer misread. `array.new<Family>(5)`, `array.new<label>(5)`, `array.new<color>(20)`, `array.new<chart.point>(5)` and `matrix.new<Family>(2)` were previously parsed as a chain of comparisons rather than as calls, which hid them from every check, from parameter hints, and from call-aware navigation. Only four element types were unaffected: `float`, `int`, `bool` and `string`.
-- Collections are now treated as exact in their element type, matching TradingView. An `array<int>` no longer fits where an `array<float>` is expected, and vice versa. Whole numbers widen to decimals for plain values, but not inside a collection.
+- Generic collection constructor calls such as array.new are now recognized correctly instead of being misread, so element types are tracked and related checks apply as expected.
+
+### Improved
+
+- Element type tracking for generic collections now follows the type argument, the receiver, and named or variadic arguments, giving more accurate diagnostics for typed collections.
 
 ## [2.7.1] 2026-07-21
 
