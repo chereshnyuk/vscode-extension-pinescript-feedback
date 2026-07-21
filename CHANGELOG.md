@@ -2,8 +2,20 @@
 
 ## [Unreleased]
 
+### Added
+
+- Type mismatch detection for four cases TradingView rejects but the editor previously accepted: conditional branches that cannot share a type such as `close > 0 ? 1 : "a"`, assignments and typed declarations whose value does not fit the variable such as `int x = 1.5`, operators applied to incompatible values such as `"text" + close`, and built-in call arguments whose type or qualifier does not match the parameter such as `plot("hello")` or a bar-varying length passed to `ta.ema`.
+- These checks stay quiet whenever a type cannot be determined confidently, so unfamiliar or partially written code is not flagged on a guess.
+
+### Changed
+
+- Argument type problems now report under a single code, `argument-type-mismatch`. It replaces four narrower codes (`box-right-arg-type-mismatch`, `builtin-param-qualifier-mismatch`, `builtin-const-param-series-mismatch`, `function-arg-type-mismatch`), which are no longer reported. If you filter or suppress problems by code, update those entries. The checks themselves were not removed — they were folded into the general argument check, which now also covers calls the old ones missed: overloaded built-ins such as `box.new` and `label.new`, script declarations, and the types of your own function parameters.
+
 ### Fixed
 
+- Switch blocks whose body begins with a comment are now read correctly. Previously the entire block could be misread, hiding its contents from analysis and producing misleading results.
+- Arguments to overloaded built-ins are matched against the specific overload being called, so a call such as `timestamp("America/New_York", 2020, 1, 1)` is no longer misread against a different overload's parameters.
+- More accurate type reasoning in several places: dividing two whole numbers now yields a whole number, results of functions such as `math.max` and `nz` keep the stability of their arguments, and a call to your own function is no longer mistaken for a built-in that happens to share its short name.
 - Corrected the types of built-in variables so type-aware diagnostics judge them accurately. Symbol information such as `syminfo.ticker` and `syminfo.prefix` was previously recorded as a number rather than text, which could make correct code look wrong.
 - Filled in the argument types of built-in functions, so argument checks now cover most parameters instead of a minority of them.
 - Scripts that reference built-in functions which do not exist in Pine v6 such as `color.hsv` or `label.set_url` are now flagged as unknown instead of being accepted silently.
