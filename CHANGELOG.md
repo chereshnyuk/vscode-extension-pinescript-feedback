@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.7.3] 2026-07-22
+
+### Added
+
+- Method-call syntax such as `arr.get` is now fully analyzed, so argument checks, hover, signature help, inlay hints, documentation links, and completion all work on method form.
+- Method calls on literal receivers including boolean, string, float, and color values are now recognized.
+- Unresolvable qualified calls on an unknown receiver are now reported as errors.
+
+### Fixed
+
+- Conditional expressions now carry the qualifier of their condition, so a comparison used in a ternary no longer resolves to the wrong qualifier and passes a value TradingView rejects.
+- Repeated use of the same identifier in one expression, such as `baseLen + baseLen` or `close - close[1]`, now resolves correctly instead of being treated as unknown.
+- Arguments to user-declared methods are now type checked.
+- The number literal `1e5` followed by a method call is no longer flagged as a false positive.
+- The overlay inlay hint now appears only when `overlay` is omitted and no longer shows a wrong value for the positional form.
+
+### Improved
+
+- Rebuilt the Marketplace README as a shorter, visual-led listing with a quick start near the top and one screenshot per feature.
+
 ## [2.7.2] 2026-07-21
 
 ### Fixed

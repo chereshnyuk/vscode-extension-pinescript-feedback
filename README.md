@@ -5,11 +5,10 @@ Build TradingView indicators, strategies, and libraries in VS Code with full Pin
 [![Version](https://vsmarketplacebadges.dev/version-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Installs](https://vsmarketplacebadges.dev/installs-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
 [![Rating](https://vsmarketplacebadges.dev/rating-short/chereshnyuk.chereshnyuk-com-pinescript.png)](https://marketplace.visualstudio.com/items?itemName=chereshnyuk.chereshnyuk-com-pinescript)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/3b6d852ac6637b765cbd4ba22e926c25d79247c704ce457f638443139c639a7a)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F74-brightgreen)](https://www.virustotal.com/gui/file/95f6477553c9935341ade1519119bb8ca1842b6186d89d45a9e4e04f02f720c5)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Pine Script v6](https://img.shields.io/badge/Pine%20Script-v6-2962FF)](https://www.tradingview.com/pine-script-docs/)
 [![MCP](https://img.shields.io/badge/MCP-server-6E56CF)](#ai-integration)
-
 <!-- readme-badges:end -->
 
 ![Completion on a user-defined type listing its fields and user-defined methods](assets/screenshots/hero.png)
@@ -125,10 +124,9 @@ If Pine Script DevKit helps your workflow, you can [buy me a coffee](https://buy
 
 <!-- virustotal-trust:start -->
 
-Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.7.2.
+Each published VSIX is scanned with VirusTotal before Marketplace release for version 2.7.3.
 
-Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/3b6d852ac6637b765cbd4ba22e926c25d79247c704ce457f638443139c639a7a).
-
+Detections: 0/74. [View report on VirusTotal](https://www.virustotal.com/gui/file/95f6477553c9935341ade1519119bb8ca1842b6186d89d45a9e4e04f02f720c5).
 <!-- virustotal-trust:end -->
 
 ## Disclaimer
