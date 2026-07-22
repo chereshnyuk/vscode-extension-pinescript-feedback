@@ -196,7 +196,7 @@
 - Fixed false consistency warnings for fixed-lag routine reads that match Pine runtime behavior.
 - Fixed false local-history warnings in nested conditions.
 - Fixed a false consistency warning for branch-local reassignments of untyped parameters.
-- Fixed false CW10003 warnings on inline drawing lifecycle helpers (`label.delete(label.new(...)[1])`) under `barstate.islast` (dna bands parity).
+- Fixed false CW10003 warnings on inline drawing lifecycle helpers under `barstate.islast`.
 - Fixed false CW10003 warnings on built-in `ta.*` calls in routine assignment short-circuit chains where TradingView emits CW10002 only.
 
 ## [2.3.4] 2026-07-12
